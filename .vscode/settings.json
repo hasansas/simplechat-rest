@@ -1,0 +1,5 @@
+{
+    "standard.enableGlobally": true,
+    "standard.autoFixOnSave": true,
+    "standard.enable": true
+}
