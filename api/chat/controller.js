@@ -93,11 +93,11 @@ class ChatsController {
       }
 
       // Send message
-
       const sendMessage = await DB.sequelize.transaction(async (t) => {
         const clientId = getClient.id
-        const clientUserId = this.request.body.from.refId
+        // const clientUserId = this.request.body.from.refId
         const clientUser = this.request.body.from.user
+        const clientUserId = clientUser === 'guest' ? this.request.body.from.refId : stringHex.toHex(clientId)
         const message = this.request.body.message
 
         // user name
@@ -172,9 +172,10 @@ class ChatsController {
 
         // Send IO message
         const ioClientId = stringHex.toHex(clientId)
+        const sendTo = this.request.body.sendTo || ioClientId
         ioMessage({
           name: 'chat_message',
-          clientId: ioClientId,
+          clientId: sendTo,
           message: {
             event: 'incoming',
             data: chatData
