@@ -1,4 +1,4 @@
-# Node.Js RESTful API
+# SimpleChat RESTful API
 > Modular RESTful API with Node.Js, Express, Redis, PostgreSQL, Sequelize, Socket.IO, and Javascript Standard Style 
 
 [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
