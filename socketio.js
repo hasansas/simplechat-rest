@@ -29,7 +29,7 @@ export default function (httpServer) {
     socket.on('connected', function ({ clientUser, page = null }) {
       socket.data.clientUser = clientUser
       socket.data.page = page
-      console.log(`IO connected(${socket.data.clientUser})`)
+      // console.log(`IO connected(${socket.data.clientUser})`)
     })
 
     socket.on('disconnect', () => {
