@@ -329,11 +329,17 @@ class UsersController {
       const user = await this.usersModel.findOne({
         where: { email: _email },
         attributes: ['id', 'password', 'active'],
-        include: [{
-          model: this.rolesModel,
-          attributes: ['name'],
-          through: { attributes: [] }
-        }]
+        include: [
+          {
+            model: this.rolesModel,
+            attributes: ['name'],
+            through: { attributes: [] }
+          },
+          {
+            model: this.clientsModel,
+            attributes: ['id']
+          }
+        ]
       })
 
       if (!user) {
@@ -383,11 +389,11 @@ class UsersController {
       // create token
       const jwtr = new JWTR(redisClient)
       const _jwtSecret = ENV.JWT_SECRET
-      const _payload = { id: user.id, role: _role, jti: user.id }
+      const _payload = { id: user.id, role: _role, client: user?.client?.id, jti: user.id }
       const _token = await jwtr.sign(_payload, _jwtSecret, { expiresIn: 525600, algorithm: 'HS256' })
 
       // response
-      SEND_RESPONSE.success({ res: this.res, statusCode: HTTP_RESPONSE.status.ok, data: { token: _token } })
+      SEND_RESPONSE.success({ res: this.res, statusCode: HTTP_RESPONSE.status.ok, data: { _payload, token: _token } })
     } catch (error) {
       return SEND_RESPONSE.error({ res: this.res, statusCode: HTTP_RESPONSE.status.internalServerError, error })
     }
@@ -601,16 +607,26 @@ class UsersController {
           where: {
             id: this.request.authUser.id
           },
-          include: [{
-            model: this.usersInfoModel,
-            attributes: ['dateOfBirth', 'placeOfBirth', 'gender']
-          }]
+          include: [
+            {
+              model: this.usersInfoModel,
+              attributes: ['dateOfBirth', 'placeOfBirth', 'gender']
+            },
+            {
+              model: this.clientsModel,
+              attributes: ['id']
+            }]
         })
         .then((data) => {
-          if (data !== null) {
-            const _paretDir = 'users/' + data.id
-            data.image = this.storage.fileInfo({ parentDir: _paretDir, fileName: data.image })
+          if (data === null) {
+            const _error = {
+              message: 'user doesn\'t exist. '
+            }
+            return SEND_RESPONSE.error({ res: this.res, statusCode: HTTP_RESPONSE.status.badRequest, error: _error })
           }
+
+          const _paretDir = 'users/' + data.id
+          data.image = this.storage.fileInfo({ parentDir: _paretDir, fileName: data.image })
           return SEND_RESPONSE.success({ res: this.res, statusCode: HTTP_RESPONSE.status.ok, data })
         })
         .catch((error) => {

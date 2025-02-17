@@ -72,6 +72,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'user_id',
       required: false
     })
+    Users.hasOne(models.clients, {
+      foreignKey: 'user_id',
+      required: false
+    })
   }
   return Users
 }

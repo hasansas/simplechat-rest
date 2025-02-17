@@ -44,7 +44,7 @@ export default async function (req, res, next) {
     next()
   } catch (error) {
     if (error.name && error.name === 'TokenDestroyedError') {
-      return SEND_RESPONSE.error({ res: res, statusCode: HTTP_RESPONSE.status.internalServerError, error: { message: 'Invalid authorization token' } })
+      return SEND_RESPONSE.error({ res: res, statusCode: HTTP_RESPONSE.status.unauthorized, error: { message: 'Invalid authorization token' } })
     }
     return SEND_RESPONSE.error({ res: res, statusCode: HTTP_RESPONSE.status.internalServerError, error })
   }

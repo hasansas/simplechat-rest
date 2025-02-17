@@ -18,7 +18,7 @@ export default function (req, res, next) {
   const _xApiKey = ENV.API_SECRET
   if (!_xApiKeyHeader) {
     return res.status(403).json({
-      message: 'No API key was found',
+      message: 'No API key provided',
       status: 403
     })
   }

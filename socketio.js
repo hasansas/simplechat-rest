@@ -26,15 +26,15 @@ export default function (httpServer) {
 
     IO.to(_clientId).emit('connected', _clientId)
 
-    socket.on('connected', function ({ userId, page = null }) {
-      socket.data.userId = userId
+    socket.on('connected', function ({ clientUser, page = null }) {
+      socket.data.clientUser = clientUser
       socket.data.page = page
-      // console.log(`IO connected(${socket.data.userId})`)
+      console.log(`IO connected(${socket.data.clientUser})`)
     })
 
     socket.on('disconnect', () => {
-      // const userId = socket.data.userId
-      // console.log(`IO disconnect(${userId})`)
+      // const clientUser = socket.data.clientUser
+      // console.log(`IO disconnect(${clientUser})`)
     })
 
     // TODO: add onAny for development mode
