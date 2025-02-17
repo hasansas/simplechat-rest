@@ -35,8 +35,18 @@ class ClientsConfigurationsController {
    */
   async show () {
     try {
-      // success response
-      return SEND_RESPONSE.success({ res: this.res, statusCode: HTTP_RESPONSE.status.notImplement })
+      return this.clientsModel
+        .findOne({
+          where: {
+            id: this.request.params.id
+          }
+        })
+        .then((data) => {
+          return SEND_RESPONSE.success({ res: this.res, statusCode: HTTP_RESPONSE.status.ok, data })
+        })
+        .catch((error) => {
+          return SEND_RESPONSE.error({ res: this.res, statusCode: HTTP_RESPONSE.status.internalServerError, error })
+        })
     } catch (error) {
       return SEND_RESPONSE.error({ res: this.res, statusCode: HTTP_RESPONSE.status.internalServerError, error: error })
     }
@@ -57,7 +67,7 @@ class ClientsConfigurationsController {
           where: {
             userId: this.request.authUser.id
           },
-          attributes: ['serverKey', 'clientKey']
+          attributes: ['serverKey', 'clientKey', 'sdkKey']
         })
         .then((data) => {
           return SEND_RESPONSE.success({ res: this.res, statusCode: HTTP_RESPONSE.status.ok, data })

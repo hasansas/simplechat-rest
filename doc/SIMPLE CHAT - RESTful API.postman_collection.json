@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9f36db9c-d222-4c84-8ac7-d6f8445f3103",
+		"_postman_id": "c06590cb-8516-477f-b59a-962543b48323",
 		"name": "SIMPLE CHAT - RESTful API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "3251103"
@@ -537,19 +537,21 @@
 					},
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
 							{
 								"key": "x-api-key",
 								"type": "text",
-								"value": "{{x_api_key}}"
-							},
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "Bearer {{dev_token}}"
+								"value": "{{apiKey}}"
 							}
 						],
 						"body": {
@@ -620,19 +622,21 @@
 					"name": "Add Template",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
 							{
 								"key": "x-api-key",
 								"type": "text",
-								"value": "{{x_api_key}}"
-							},
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "Bearer {{dev_token}}"
+								"value": "{{apiKey}}"
 							}
 						],
 						"body": {
@@ -1027,6 +1031,69 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chats",
+			"item": [
+				{
+					"name": "Send Message",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{apiKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sendTo\": \"6285743603567\",\n    \"user\": \"guest\",\n    \"refId\": \"hello world\",\n    \"message\": {\n        \"body\": \"halo\",\n        \"type\": \"text\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/chats/message/send",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"chats",
+								"message",
+								"send"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
