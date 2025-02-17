@@ -829,6 +829,281 @@
 			]
 		},
 		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "Get Clients",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{apiKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/clients",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"clients"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2",
+									"description": "search by title",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "filter by category",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "createdAt",
+									"description": "filter by tutor",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "asc",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Client",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{clientToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{apiKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/clients/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"clients",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4462441e-37d1-48e6-8f1c-c38d4e0e7f01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Clients",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{apiKey}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "category_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "bbbbb",
+									"type": "text"
+								},
+								{
+									"key": "subtitle",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "tag",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "skill_level",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "publish",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "is_pre_test_enable",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "is_post_test_enable",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/clients",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Clients",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{apiKey}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "category_id",
+									"value": "24ec7d6d-17b6-43ba-9179-ed47e1e89078",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "ccc acsa",
+									"type": "text"
+								},
+								{
+									"key": "subtitle",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "tag",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "skill_level",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "publish",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "is_pre_test_enable",
+									"value": "false",
+									"type": "text"
+								},
+								{
+									"key": "is_post_test_enable",
+									"value": "false",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/clients/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"clients",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "b66e04cf-771f-4f20-84a3-22e77dff1ddd"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Settings",
 			"item": [
 				{
@@ -1038,7 +1313,7 @@
 			"name": "Chats",
 			"item": [
 				{
-					"name": "Send Message",
+					"name": "Chat Auth",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -1052,8 +1327,52 @@
 							}
 						],
 						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "sdkKey",
+									"value": "ec5eebd7058c55c7a3d27d8a032b6a9f",
+									"description": "sdk key",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/chats/auth",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"chats",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{apiKey}}"
+							},
+							{
+								"key": "sdk-key",
+								"value": "ec5eebd7058c55c7a3d27d8a032b6a9f",
+								"type": "text"
+							}
+						],
+						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"sendTo\": \"6285743603567\",\n    \"user\": \"guest\",\n    \"refId\": \"hello world\",\n    \"message\": {\n        \"body\": \"halo\",\n        \"type\": \"text\"\n    }\n}",
+							"raw": "{\n    \"sendTo\": \"4462441\",\n    \"from\": {\n        \"clientId\": \"12345\",\n        \"user\": \"guest\",\n        \"refId\": \"999999\"\n    },\n    \"message\": {\n        \"body\": \"halo\",\n        \"type\": \"text\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
